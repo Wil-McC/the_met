@@ -22,6 +22,12 @@ class MuseumTest < Minitest::Test
 
     @patron_3 = Patron.new("Johnny", 5)
     @patron_3.add_interest("Dead Sea Scrolls")
+
+    @grouped_interest_hash = {
+                              @gems_and_minerals => [@patron_1],
+                              @dead_sea_scrolls  => [@patron_1, @patron_3],
+                              @imax              => [@patron_2]
+                             }
   end
 
   def test_it_exists_with_attributes
@@ -56,15 +62,14 @@ class MuseumTest < Minitest::Test
     @dmns.admit(@patron_2)
     @dmns.admit(@patron_3)
 
-    assert_equal [@patron_1, @patron_2, @patron_3]
+    assert_equal [@patron_1, @patron_2, @patron_3], @dmns.patrons
   end
 
   def test_it_groups_patrons_by_exhibit_interest
-    skip
     @dmns.add_exhibit(@gems_and_minerals)
     @dmns.add_exhibit(@dead_sea_scrolls)
     @dmns.add_exhibit(@imax)
 
-
+    assert_equal @grouped_interest_hash, @dmns.patrons_by_exhibit_interest
   end
 end
