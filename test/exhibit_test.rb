@@ -9,6 +9,7 @@ class ExhibitTest < Minitest::Test
   end
 
   def test_it_exists_with_attributes
-    
+    assert_instance_of Exhibit, @exhibit
+    assert_equal "Gems and Minerals", @exhibit.name
   end
 end
