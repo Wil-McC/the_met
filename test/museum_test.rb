@@ -105,6 +105,7 @@ class MuseumTest < Minitest::Test
 
     expected_options = ["Johnny", "Jimbo"]
 
-    assert_equal true, expected_options.include?(@dmns.draw_lottery_winner)
+    assert_equal true, expected_options.include?(@dmns.draw_lottery_winner(@dead_sea_scrolls))
+    assert_equal nil, @dmns.draw_lottery_winner(@gems_and_minerals)
   end
 end
