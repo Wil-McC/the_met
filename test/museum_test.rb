@@ -23,6 +23,9 @@ class MuseumTest < Minitest::Test
     @patron_3 = Patron.new("Johnny", 5)
     @patron_3.add_interest("Dead Sea Scrolls")
 
+    @patron_4 = Patron.new("Jimbo", 0)
+    @patron_4.add_interest("Dead Sea Scrolls")
+
     @grouped_interest_hash = {
                               @gems_and_minerals => [@patron_1],
                               @dead_sea_scrolls  => [@patron_1, @patron_3],
@@ -69,6 +72,10 @@ class MuseumTest < Minitest::Test
     @dmns.add_exhibit(@gems_and_minerals)
     @dmns.add_exhibit(@dead_sea_scrolls)
     @dmns.add_exhibit(@imax)
+
+    @dmns.admit(@patron_1)
+    @dmns.admit(@patron_2)
+    @dmns.admit(@patron_3)
 
     assert_equal @grouped_interest_hash, @dmns.patrons_by_exhibit_interest
   end
